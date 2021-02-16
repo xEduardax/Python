@@ -1,0 +1,50 @@
+def BuscaBin(CodigosVaca, minimo, maximo, buscar):            #Função busca binaria
+    if maximo < minimo:
+        return -1  # diz que o codigo não existe na lista
+    meio = (minimo + maximo) // 2  # calcula se o numero ta no meio  da lista
+    if CodigosVaca[meio] == buscar:
+        return meio
+
+    elif CodigosVaca[meio] > buscar:  # verifica se esta antes ou apos o meio da lista
+        return BuscaBin(CodigosVaca, minimo, meio - 1, buscar)
+    else:
+        return BuscaBin(CodigosVaca, meio + 1, maximo, buscar)
+
+
+CodigosVaca = [5123, 5162, 1465, 1468, 1623, 1453]                                #lista de vacas ordenhadas
+CodigosVaca.sort()
+
+Codigo = int(input('Digite o código da vaca que deseja consultar: '))
+codigo_procurado = int(Codigo)
+BuscaBin(CodigosVaca, 0, len(CodigosVaca) - 1, codigo_procurado)
+
+
+para_busca = BuscaBin(CodigosVaca, 0, len(CodigosVaca) - 1, codigo_procurado)
+
+if (int(para_busca) >=0):
+     print(f'A vaca código {codigo_procurado} foi ordenhada')
+else:
+     print(f'A vaca código {codigo_procurado} ainda não foi ordenhada!')
+print('\n')
+
+opcao=0
+para_busca = BuscaBin(CodigosVaca, 0, len(CodigosVaca) - 1, codigo_procurado)
+
+while opcao!=2:
+    print('\n')
+    print('''    ([1] Consultar novamente?
+       [2] sair do programa''')
+    opcao = int(input('>>>>>Qual é a sua opção: '))
+    if opcao == 1:
+        print('\n')
+        Codigo = int(input('Digite o códifo da vaca que deseja consultar: '))
+        codigo_procurado = int(Codigo)
+        para_busca = BuscaBin(CodigosVaca, 0, len(CodigosVaca) -1, codigo_procurado)
+        if int (para_busca) >= 0:
+             print(f'A vaca código {codigo_procurado} foi ordenhada')
+        else:
+             print(f'A vaca código {codigo_procurado} ainda não foi ordenhada! ')
+    elif opcao == 2:
+        print('Finalizando...')
+    else:
+        print('Opção inválida. Tente novamente')
